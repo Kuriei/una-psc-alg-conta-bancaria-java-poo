@@ -1,0 +1,49 @@
+import java.util.Scanner;
+
+public class PrincipalConta {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("---- CRIAÇÃO DE CONTA BANCÁRIA ----");
+        System.out.print("Informe o nome da pessoa: ");
+        String nome = sc.nextLine();
+
+        System.out.print("Informe o número da conta: ");
+        String numeroConta = sc.nextLine();
+
+        System.out.print("Informe o saldo inicial: R$ ");
+        double saldoInicial = sc.nextDouble();
+
+        ContaBancaria conta = new ContaBancaria(nome, numeroConta, saldoInicial);
+        System.out.println("Conta bancária criada com sucesso.");
+
+        String opcao;
+        do {
+            System.out.println("\n---- MENU ----");
+            System.out.println("[1] Depositar");
+            System.out.println("[2] Sacar");
+            System.out.println("[3] Ver Saldo");
+            System.out.println("[Q] Sair");
+            System.out.print("Escolha uma opção: ");
+            opcao = sc.next().toUpperCase();
+
+            switch (opcao) {
+                case "1" -> {
+                    System.out.print("Digite o valor para depósito: R$ ");
+                    double valorDeposito = sc.nextDouble();
+                    conta.depositar(valorDeposito);
+                }
+                case "2" -> {
+                    System.out.print("Digite o valor para saque: R$ ");
+                    double valorSaque = sc.nextDouble();
+                    conta.sacar(valorSaque);
+                }
+                case "3" -> conta.exibirSaldo();
+                case "Q" -> System.out.println("Encerrando o programa...");
+                default -> System.out.println("Opção inválida.");
+            }
+        } while (!opcao.equals("Q"));
+
+        sc.close();
+    }
+}
